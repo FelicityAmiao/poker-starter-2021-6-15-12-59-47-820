@@ -160,8 +160,7 @@ public class Poker {
     }
 
     private int[] descendingSort(int[] handsNumbers) {
-        Map<Integer, Integer> map = getDistinctNumbersWithCount(handsNumbers);
-        map = getDistinctNumbersWithCount2(handsNumbers);
+        Map<Integer, Integer> map = getDistinctNumbersWithCount2(handsNumbers);
 
         List<Map.Entry<Integer, Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>();
         list.addAll(map.entrySet());
@@ -178,18 +177,6 @@ public class Poker {
             i++;
         }
         return arrayresult;
-    }
-
-    private Map<Integer, Integer> getDistinctNumbersWithCount(int[] handsNumbers) {
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        for (int i = 0; i < handsNumbers.length; i++) {
-            if (map.get(handsNumbers[i]) != null) {
-                map.put(handsNumbers[i], map.get(handsNumbers[i]) + 1);
-            } else {
-                map.put(handsNumbers[i], 1);
-            }
-        }
-        return map;
     }
 
     private Map<Integer, Integer> getDistinctNumbersWithCount2(int[] handsNumbers) {
