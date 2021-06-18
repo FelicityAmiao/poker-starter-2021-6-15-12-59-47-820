@@ -3,13 +3,13 @@ package com.thoughtworks.refactor;
 import java.util.*;
 
 public class Poker {
-    public String compareResult(String black, String white) {
+    public String compareResult(String blackPlayerCard, String whitePlayerCard) {
         String winResult = "";
-        String blackType = judgeType(black);
-        String whiteType = judgeType(white);
+        String blackType = judgeType(blackPlayerCard);
+        String whiteType = judgeType(whitePlayerCard);
         String[] type = {"StraightFlush", "FourOfAKind", "FullHouse", "Flush", "Straight", "ThreeOfAKind", "TwoPair", "OnePair", "HighCard"};
-        int[] blackNumber = strNumber(black);
-        int[] whiteNumber = strNumber(white);
+        int[] blackNumber = strNumber(blackPlayerCard);
+        int[] whiteNumber = strNumber(whitePlayerCard);
         int blackIndex = judgeIndex(blackType);
         int whiteIndex = judgeIndex(whiteType);
         int[] blackArraySort = arraySort(blackNumber);
