@@ -189,33 +189,32 @@ public class Poker {
     //判断是什么牌
     private String getHandsCategory(String hands) {
         String handsCategory = "";
-        int[] number = getHandsNumbers(hands);
 
-        if (isStraightFlush(hands, number)) { //五个相邻的数字且花色一样——同花顺
+        if (isStraightFlush(hands, getHandsNumbers(hands))) { //五个相邻的数字且花色一样——同花顺
             return "StraightFlush";
         }
-        if (isStraight(number)) { //五个相邻数字——顺子
+        if (isStraight(getHandsNumbers(hands))) { //五个相邻数字——顺子
             return "Straight";
         }
-        if (isFlush(hands, number)) { //同一花色——同花
+        if (isFlush(hands, getHandsNumbers(hands))) { //同一花色——同花
             return "Flush";
         }
-        if (isHighCard(number)) { //五个不相邻的数字——散牌
+        if (isHighCard(getHandsNumbers(hands))) { //五个不相邻的数字——散牌
             return "HighCard";
         }
-        if (isOnePair(number)) { //一对相同，其余三个数字不同——对子
+        if (isOnePair(getHandsNumbers(hands))) { //一对相同，其余三个数字不同——对子
             return "OnePair";
         }
-        if (isTwoPair(number)) { //两对
+        if (isTwoPair(getHandsNumbers(hands))) { //两对
             return "TwoPair";
         }
-        if (isThreeOfAKind(number)) { //三个数字相同，另外两个数字不同——三条
+        if (isThreeOfAKind(getHandsNumbers(hands))) { //三个数字相同，另外两个数字不同——三条
             return "ThreeOfAKind";
         }
-        if (isFourOfAKind(number)) { //三个数字相同，另外两个数字相同——葫芦
+        if (isFourOfAKind(getHandsNumbers(hands))) { //三个数字相同，另外两个数字相同——葫芦
             return "FourOfAKind";
-        } 
-        if (isFullHouse(number)) { //四个数字相同——铁支
+        }
+        if (isFullHouse(getHandsNumbers(hands))) { //四个数字相同——铁支
             return "FullHouse";
         }
         return handsCategory;
