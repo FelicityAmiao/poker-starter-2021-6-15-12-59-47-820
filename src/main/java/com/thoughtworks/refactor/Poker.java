@@ -12,8 +12,8 @@ public class Poker {
         int[] whiteNumbers = convertToSortedNumbers(whitePlayerCard);
         int blackIndex = getCardTypeIndex(blackCardType);
         int whiteIndex = getCardTypeIndex(whiteCardType);
-        int[] blackArraySort = arraySort(blackNumbers);
-        int[] whiteArraySort = arraySort(whiteNumbers);
+        int[] blackArraySort = sortCardNumbers(blackNumbers);
+        int[] whiteArraySort = sortCardNumbers(whiteNumbers);
         int[] blackRepeat = noOrRepeatNumber(blackNumbers, 0);
         int[] whiteRepeat = noOrRepeatNumber(whiteNumbers, 0);
         int[] blackNoRepeat = noOrRepeatNumber(blackNumbers, 1);
@@ -150,7 +150,7 @@ public class Poker {
         return strNumber[i - 2];
     }
 
-    private int[] arraySort(int[] number) {
+    private int[] sortCardNumbers(int[] number) {
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         for (int i = 0; i < number.length; i++) {
             if (map.get(number[i]) != null) {
