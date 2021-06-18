@@ -193,31 +193,63 @@ public class Poker {
         if (isStraightFlush(hands)) { //五个相邻的数字且花色一样——同花顺
             return "StraightFlush";
         }
-        if (isStraight(getHandsNumbers(hands))) { //五个相邻数字——顺子
+        if (isStraight(hands)) { //五个相邻数字——顺子
             return "Straight";
         }
-        if (isFlush(hands, getHandsNumbers(hands))) { //同一花色——同花
+        if (isFlush(hands)) { //同一花色——同花
             return "Flush";
         }
-        if (isHighCard(getHandsNumbers(hands))) { //五个不相邻的数字——散牌
+        if (isHighCard(hands)) { //五个不相邻的数字——散牌
             return "HighCard";
         }
-        if (isOnePair(getHandsNumbers(hands))) { //一对相同，其余三个数字不同——对子
+        if (isOnePair(hands)) { //一对相同，其余三个数字不同——对子
             return "OnePair";
         }
-        if (isTwoPair(getHandsNumbers(hands))) { //两对
+        if (isTwoPair(hands)) { //两对
             return "TwoPair";
         }
-        if (isThreeOfAKind(getHandsNumbers(hands))) { //三个数字相同，另外两个数字不同——三条
+        if (isThreeOfAKind(hands)) { //三个数字相同，另外两个数字不同——三条
             return "ThreeOfAKind";
         }
-        if (isFourOfAKind(getHandsNumbers(hands))) { //三个数字相同，另外两个数字相同——葫芦
+        if (isFourOfAKind(hands)) { //三个数字相同，另外两个数字相同——葫芦
             return "FourOfAKind";
         }
-        if (isFullHouse(getHandsNumbers(hands))) { //四个数字相同——铁支
+        if (isFullHouse(hands)) { //四个数字相同——铁支
             return "FullHouse";
         }
         return handsCategory;
+    }
+
+    private boolean isFullHouse(String hands) {
+        return isFullHouse(getHandsNumbers(hands));
+    }
+
+    private boolean isFourOfAKind(String hands) {
+        return isFourOfAKind(getHandsNumbers(hands));
+    }
+
+    private boolean isThreeOfAKind(String hands) {
+        return isThreeOfAKind(getHandsNumbers(hands));
+    }
+
+    private boolean isTwoPair(String hands) {
+        return isTwoPair(getHandsNumbers(hands));
+    }
+
+    private boolean isOnePair(String hands) {
+        return isOnePair(getHandsNumbers(hands));
+    }
+
+    private boolean isHighCard(String hands) {
+        return isHighCard(getHandsNumbers(hands));
+    }
+
+    private boolean isFlush(String hands) {
+        return isFlush(hands, getHandsNumbers(hands));
+    }
+
+    private boolean isStraight(String hands) {
+        return isStraight(getHandsNumbers(hands));
     }
 
     private boolean isStraightFlush(String hands) {
