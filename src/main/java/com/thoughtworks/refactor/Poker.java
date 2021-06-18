@@ -190,9 +190,8 @@ public class Poker {
     private String getHandsCategory(String hands) {
         String handsCategory = "";
         int[] number = getHandsNumbers(hands);
-        HashSet<String> suits = getHandsSuit(hands.split(""));
-        int suitsSize = suits.size();
-
+        
+        int suitsSize = getHandsSuit(hands.split("")).size();
         int distinctNumbersSize = getDistinctHandsNumbers(number).size();
 
         if (distinctNumbersSize == 5) {
