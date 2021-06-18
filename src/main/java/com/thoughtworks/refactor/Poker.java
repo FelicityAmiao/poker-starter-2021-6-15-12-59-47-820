@@ -159,6 +159,26 @@ public class Poker {
     }
 
     private int[] descendingSort(int[] handsNumbers) {
+        Map<Integer, Integer> map = getDistinctNumbersWithCount(handsNumbers);
+
+        List<Map.Entry<Integer, Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>();
+        list.addAll(map.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
+            public int compare(Map.Entry<Integer, Integer> arg0, Map.Entry<Integer, Integer> arg1) {
+                return arg1.getValue().compareTo(arg0.getValue());
+            }
+        });
+
+        int[] arrayresult = new int[list.size()];
+        int i = 0;
+        for (Map.Entry<Integer, Integer> entry : list) {
+            arrayresult[i] = entry.getKey();
+            i++;
+        }
+        return arrayresult;
+    }
+
+    private Map<Integer, Integer> getDistinctNumbersWithCount(int[] handsNumbers) {
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         for (int i = 0; i < handsNumbers.length; i++) {
             if (map.get(handsNumbers[i]) != null) {
@@ -167,20 +187,19 @@ public class Poker {
                 map.put(handsNumbers[i], 1);
             }
         }
-        List<Map.Entry<Integer, Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>();
-        list.addAll(map.entrySet());
-        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
-            public int compare(Map.Entry<Integer, Integer> arg0, Map.Entry<Integer, Integer> arg1) {
-                return arg1.getValue().compareTo(arg0.getValue());
+        return map;
+    }
+
+    private Map<Integer, Integer> getDistinctNumbersWithCount2(int[] handsNumbers) {
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int i = 0; i < handsNumbers.length; i++) {
+            if (map.get(handsNumbers[i]) != null) {
+                map.put(handsNumbers[i], map.get(handsNumbers[i]) + 1);
+            } else {
+                map.put(handsNumbers[i], 1);
             }
-        });
-        int[] arrayresult = new int[list.size()];
-        int i = 0;
-        for (Map.Entry<Integer, Integer> entry : list) {
-            arrayresult[i] = entry.getKey();
-            i++;
         }
-        return arrayresult;
+        return map;
     }
 
     //先获得数组中每个元素出现的次数，然后再进行计算出现次数大于1的和出现次数等于1的
