@@ -190,7 +190,7 @@ public class Poker {
     private String getHandsCategory(String hands) {
         String handsCategory = "";
 
-        if (isStraightFlush(hands, getHandsNumbers(hands))) { //五个相邻的数字且花色一样——同花顺
+        if (isStraightFlush(hands)) { //五个相邻的数字且花色一样——同花顺
             return "StraightFlush";
         }
         if (isStraight(getHandsNumbers(hands))) { //五个相邻数字——顺子
@@ -218,6 +218,10 @@ public class Poker {
             return "FullHouse";
         }
         return handsCategory;
+    }
+
+    private boolean isStraightFlush(String hands) {
+        return isStraightFlush(hands, getHandsNumbers(hands));
     }
 
     private boolean isFullHouse(int[] number) {
