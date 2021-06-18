@@ -194,10 +194,10 @@ public class Poker {
         if (isStraightFlush(hands, number)) { //五个相邻的数字且花色一样——同花顺
             return "StraightFlush";
         }
-
         if (isStraight(number)) { //五个相邻数字——顺子
-            handsCategory = "Straight";
-        } else if (isFlush(hands, number)) { //同一花色——同花
+            return "Straight";
+        }
+        if (isFlush(hands, number)) { //同一花色——同花
             handsCategory = "Flush";
         } else if (isHighCard(number)) { //五个不相邻的数字——散牌
             handsCategory = "HighCard";
