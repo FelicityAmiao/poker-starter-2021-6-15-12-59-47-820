@@ -9,11 +9,11 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PokerDifferentCardTypeTest {
+public class PokerDifferentHandsCategoryTest {
 
     private static final String STRAIGHT_FLUSH = "A2 K2 Q2 J2 T2";
     private static final String FOUR_OF_A_KIND = "91 92 93 94 53";
-    private static final String FULL_HOUSE = "A2 A3 A4 K1 K3";
+    private static final String FULL_HOUSE = "A1 A3 A4 K1 K3";
     private static final String FLUSH = "A1 K1 Q1 J1 91";
     private static final String STRAIGHT = "A1 K1 Q1 J1 T3";
     private static final String THREE_OF_A_KIND = "A1 A3 A4 K1 Q3";
@@ -21,16 +21,16 @@ public class PokerDifferentCardTypeTest {
     private static final String ONE_PAIR = "A1 A3 K4 Q1 J3";
     private static final String HIGH_CARD = "A1 K3 Q4 J1 83";
 
-    @DisplayName("The one with StraightFlush (better card type) should win")
+    @DisplayName("The one with StraightFlush (higher-ranking category) should win")
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
-    @MethodSource("stringStraightFlushAndWorseCardTypeProvider")
-    void test_compare_StraightFlush_with_worse_card_type(String black, String white, String expectResult) {
+    @MethodSource("stringStraightFlushAndLowerRankingCategoryProvider")
+    void test_compare_StraightFlush_and_lower_ranking_category(String black, String white, String expectResult) {
         String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
 
-    static Stream<Arguments> stringStraightFlushAndWorseCardTypeProvider() {
+    static Stream<Arguments> stringStraightFlushAndLowerRankingCategoryProvider() {
         return Stream.of(
                 Arguments.of(STRAIGHT_FLUSH, FOUR_OF_A_KIND, "black wins - StraightFlush"),
                 Arguments.of(STRAIGHT_FLUSH, FULL_HOUSE, "black wins - StraightFlush"),
@@ -43,16 +43,16 @@ public class PokerDifferentCardTypeTest {
         );
     }
 
-    @DisplayName("The one with FourOfAKind (better card type) should win")
+    @DisplayName("The one with FourOfAKind (higher-ranking category) should win")
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
-    @MethodSource("stringFourOfAKindAndWorseCardTypeProvider")
-    void test_compare_FourOfAKind_with_worse_card_type(String black, String white, String expectResult) {
+    @MethodSource("stringFourOfAKindAndLowerRankingCategoryProvider")
+    void test_compare_FourOfAKind_and_lower_ranking_category(String black, String white, String expectResult) {
         String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
 
-    static Stream<Arguments> stringFourOfAKindAndWorseCardTypeProvider() {
+    static Stream<Arguments> stringFourOfAKindAndLowerRankingCategoryProvider() {
         return Stream.of(
                 Arguments.of(FOUR_OF_A_KIND, FULL_HOUSE, "black wins - FourOfAKind"),
                 Arguments.of(FOUR_OF_A_KIND, FLUSH, "black wins - FourOfAKind"),
@@ -64,36 +64,36 @@ public class PokerDifferentCardTypeTest {
         );
     }
 
-    @DisplayName("The one with FullHouse (better card type) should win")
+    @DisplayName("The one with FullHouse (higher-ranking category) should win")
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
-    @MethodSource("stringFullHouseAndWorseCardTypeProvider")
-    void test_compare_FullHouse_with_worse_card_type(String black, String white, String expectResult) {
+    @MethodSource("stringFullHouseAndLowerRankingCategoryProvider")
+    void test_compare_FullHouse_and_lower_ranking_category(String black, String white, String expectResult) {
         String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
 
-    static Stream<Arguments> stringFullHouseAndWorseCardTypeProvider() {
+    static Stream<Arguments> stringFullHouseAndLowerRankingCategoryProvider() {
         return Stream.of(
-//                Arguments.of(FULL_HOUSE, FLUSH, "black wins - FullHouse"),
-//                Arguments.of(FULL_HOUSE, STRAIGHT, "black wins - FullHouse"),
-//                Arguments.of(FULL_HOUSE, THREE_OF_A_KIND, "black wins - FullHouse"),
-//                Arguments.of(FULL_HOUSE, TWO_PAIR, "black wins - FullHouse"),
-//                Arguments.of(FULL_HOUSE, ONE_PAIR, "black wins - FullHouse"),
+                Arguments.of(FULL_HOUSE, FLUSH, "black wins - FullHouse"),
+                Arguments.of(FULL_HOUSE, STRAIGHT, "black wins - FullHouse"),
+                Arguments.of(FULL_HOUSE, THREE_OF_A_KIND, "black wins - FullHouse"),
+                Arguments.of(FULL_HOUSE, TWO_PAIR, "black wins - FullHouse"),
+                Arguments.of(FULL_HOUSE, ONE_PAIR, "black wins - FullHouse"),
                 Arguments.of(FULL_HOUSE, HIGH_CARD, "black wins - FullHouse")
         );
     }
 
-    @DisplayName("The one with Flush (better card type) should win")
+    @DisplayName("The one with Flush (higher-ranking category) should win")
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
-    @MethodSource("stringFlushAndWorseCardTypeProvider")
-    void test_compare_Flush_with_worse_card_type(String black, String white, String expectResult) {
+    @MethodSource("stringFlushAndLowerRankingCategoryProvider")
+    void test_compare_Flush_and_lower_ranking_category(String black, String white, String expectResult) {
         String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
 
-    static Stream<Arguments> stringFlushAndWorseCardTypeProvider() {
+    static Stream<Arguments> stringFlushAndLowerRankingCategoryProvider() {
         return Stream.of(
                 Arguments.of(FLUSH, STRAIGHT, "black wins - Flush"),
                 Arguments.of(FLUSH, THREE_OF_A_KIND, "black wins - Flush"),
@@ -103,16 +103,16 @@ public class PokerDifferentCardTypeTest {
         );
     }
 
-    @DisplayName("The one with Straight (better card type) should win")
+    @DisplayName("The one with Straight (higher-ranking category) should win")
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
-    @MethodSource("stringStraightAndWorseCardTypeProvider")
-    void test_compare_Straight_with_worse_card_type(String black, String white, String expectResult) {
+    @MethodSource("stringStraightAndLowerRankingCategoryProvider")
+    void test_compare_Straight_and_lower_ranking_category(String black, String white, String expectResult) {
         String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
 
-    static Stream<Arguments> stringStraightAndWorseCardTypeProvider() {
+    static Stream<Arguments> stringStraightAndLowerRankingCategoryProvider() {
         return Stream.of(
                 Arguments.of(STRAIGHT, THREE_OF_A_KIND, "black wins - Straight"),
                 Arguments.of(STRAIGHT, TWO_PAIR, "black wins - Straight"),
@@ -121,16 +121,16 @@ public class PokerDifferentCardTypeTest {
         );
     }
 
-    @DisplayName("The one with ThreeOfAKind (better card type) should win")
+    @DisplayName("The one with ThreeOfAKind (higher-ranking category) should win")
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
-    @MethodSource("stringThreeOfAKindAndWorseCardTypeProvider")
-    void test_compare_ThreeOfAKind_with_worse_card_type(String black, String white, String expectResult) {
+    @MethodSource("stringThreeOfAKindAndLowerRankingCategoryProvider")
+    void test_compare_ThreeOfAKind_and_lower_ranking_category(String black, String white, String expectResult) {
         String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
 
-    static Stream<Arguments> stringThreeOfAKindAndWorseCardTypeProvider() {
+    static Stream<Arguments> stringThreeOfAKindAndLowerRankingCategoryProvider() {
         return Stream.of(
                 Arguments.of(THREE_OF_A_KIND, TWO_PAIR, "black wins - ThreeOfAKind"),
                 Arguments.of(THREE_OF_A_KIND, ONE_PAIR, "black wins - ThreeOfAKind"),
@@ -138,32 +138,32 @@ public class PokerDifferentCardTypeTest {
         );
     }
 
-    @DisplayName("The one with TwoPair (better card type) should win")
+    @DisplayName("The one with TwoPair (higher-ranking category) should win")
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
-    @MethodSource("stringTwoPairAndWorseCardTypeProvider")
-    void test_compare_TwoPair_with_worse_card_type(String black, String white, String expectResult) {
+    @MethodSource("stringTwoPairAndLowerRankingCategoryProvider")
+    void test_compare_TwoPair_and_lower_ranking_category(String black, String white, String expectResult) {
         String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
 
-    static Stream<Arguments> stringTwoPairAndWorseCardTypeProvider() {
+    static Stream<Arguments> stringTwoPairAndLowerRankingCategoryProvider() {
         return Stream.of(
                 Arguments.of(TWO_PAIR, ONE_PAIR, "black wins - TwoPair"),
                 Arguments.of(TWO_PAIR, HIGH_CARD, "black wins - TwoPair")
         );
     }
 
-    @DisplayName("The one with OnePair (better card type) should win")
+    @DisplayName("The one with OnePair (higher-ranking category) should win")
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
-    @MethodSource("stringOnePairAndWorseCardTypeProvider")
-    void test_compare_OnePair_with_worse_card_type(String black, String white, String expectResult) {
+    @MethodSource("stringOnePairAndLowerRankingCategoryProvider")
+    void test_compare_OnePair_and_lower_ranking_category(String black, String white, String expectResult) {
         String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
 
-    static Stream<Arguments> stringOnePairAndWorseCardTypeProvider() {
+    static Stream<Arguments> stringOnePairAndLowerRankingCategoryProvider() {
         return Stream.of(
                 Arguments.of(ONE_PAIR, HIGH_CARD, "black wins - OnePair")
         );
