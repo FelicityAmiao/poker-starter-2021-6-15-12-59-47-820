@@ -211,10 +211,10 @@ public class Poker {
         if (isThreeOfAKind(hands)) { //三个数字相同，另外两个数字不同——三条
             return "ThreeOfAKind";
         }
-        if (isFourOfAKind(hands)) { //三个数字相同，另外两个数字相同——葫芦
+        if (isFourOfAKind(hands)) { //四个数字相同——铁支
             return "FourOfAKind";
         }
-        if (isFullHouse(hands)) { //四个数字相同——铁支
+        if (isFullHouse(hands)) { //三个数字相同，另外两个数字相同——葫芦
             return "FullHouse";
         }
         return handsCategory;
