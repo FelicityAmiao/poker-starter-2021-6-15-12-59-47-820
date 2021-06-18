@@ -14,10 +14,10 @@ public class Poker {
         int whiteIndex = getCardTypeIndex(whiteCardType);
         int[] blackSortedNumbers = sortCardNumbers(blackNumbers);
         int[] whiteSortedNumbers = sortCardNumbers(whiteNumbers);
-        int[] blackRepeat = noOrRepeatNumber(blackNumbers, 0);
-        int[] whiteRepeat = noOrRepeatNumber(whiteNumbers, 0);
-        int[] blackNoRepeat = noOrRepeatNumber(blackNumbers, 1);
-        int[] whiteNoRepeat = noOrRepeatNumber(whiteNumbers, 1);
+        int[] blackRepeat = getRepeatNumbersByFlag(blackNumbers, 0);
+        int[] whiteRepeat = getRepeatNumbersByFlag(whiteNumbers, 0);
+        int[] blackNoRepeat = getRepeatNumbersByFlag(blackNumbers, 1);
+        int[] whiteNoRepeat = getRepeatNumbersByFlag(whiteNumbers, 1);
         if (blackIndex < whiteIndex) {
             winResult = "black wins - " + cardTypes[blackIndex];
         } else if (blackIndex > whiteIndex) {
@@ -176,7 +176,7 @@ public class Poker {
     }
 
     //先获得数组中每个元素出现的次数，然后再进行计算出现次数大于1的和出现次数等于1的
-    private int[] noOrRepeatNumber(int[] number, int flag) {
+    private int[] getRepeatNumbersByFlag(int[] number, int flag) {
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         for (int i = 0; i < number.length; i++) {
             if (map.get(number[i]) != null) {
