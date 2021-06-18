@@ -196,10 +196,7 @@ public class Poker {
         for (i = 0; i < 5; i++) {
             suit[i] = strArray[i * 3 + 1];
         }
-        HashSet<Integer> distinctNumbers = new HashSet<Integer>();
-        for (i = 0; i < 5; i++) {
-            distinctNumbers.add(number[i]);
-        }
+        HashSet<Integer> distinctNumbers = getDistinctHandsNumbers(number);
         HashSet<String> suits = new HashSet<String>();
         for (i = 0; i < 5; i++) {
             suits.add(suit[i]);
@@ -230,6 +227,15 @@ public class Poker {
             }
         }
         return handsCategory;
+    }
+
+    private HashSet<Integer> getDistinctHandsNumbers(int[] number) {
+        int i;
+        HashSet<Integer> distinctNumbers = new HashSet<Integer>();
+        for (i = 0; i < 5; i++) {
+            distinctNumbers.add(number[i]);
+        }
+        return distinctNumbers;
     }
 
     //数字转化并将其从大到小排序
