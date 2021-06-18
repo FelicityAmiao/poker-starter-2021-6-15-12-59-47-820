@@ -1,6 +1,7 @@
 package com.thoughtworks.refactor;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Poker {
     public String compareResult(String blackHands, String whiteHands) {
@@ -191,14 +192,8 @@ public class Poker {
     }
 
     private Map<Integer, Integer> getDistinctNumbersWithCount2(int[] handsNumbers) {
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        for (int i = 0; i < handsNumbers.length; i++) {
-            if (map.get(handsNumbers[i]) != null) {
-                map.put(handsNumbers[i], map.get(handsNumbers[i]) + 1);
-            } else {
-                map.put(handsNumbers[i], 1);
-            }
-        }
+        Map<Integer, Integer> map = Arrays.stream(handsNumbers).boxed()
+            .collect(Collectors.groupingBy(number -> number, Collectors.reducing(0, number -> 1, Integer::sum)));
         return map;
     }
 
