@@ -189,11 +189,10 @@ public class Poker {
     //判断是什么牌
     private String getHandsCategory(String hands) {
         String handsCategory = "";
-        String[] strArray = hands.split("");
         int[] number = getHandsNumbers(hands);
         int i;
         HashSet<Integer> distinctNumbers = getDistinctHandsNumbers(number);
-        HashSet<String> suits = getHandsSuit(strArray);
+        HashSet<String> suits = getHandsSuit(hands.split(""));
         if (distinctNumbers.size() == 5) {
             if ((number[0] - number[4] == 4) && (suits.size() == 1) && (distinctNumbers.size() == 5)) { //五个相邻的数字且花色一样——同花顺
                 handsCategory = "StraightFlush";
