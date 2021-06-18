@@ -207,7 +207,7 @@ public class Poker {
             } else if (getDistinctHandsNumbers(number).size() == 3) { //三个数字相同，另外两个数字不同——三条
                 handsCategory = "ThreeOfAKind";
             }
-        } else {
+        } else if (getDistinctHandsNumbers(number).size() == 2 || getDistinctHandsNumbers(number).size() == 1) {
             if (number[0] != number[1] || number[3] != number[4]) { //三个数字相同，另外两个数字相同——葫芦
                 handsCategory = "FourOfAKind";
             } else { //四个数字相同——铁支
