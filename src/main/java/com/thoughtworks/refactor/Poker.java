@@ -191,26 +191,62 @@ public class Poker {
         String handsCategory = "";
         int[] number = getHandsNumbers(hands);
 
-        if ((number[0] - number[4] == 4) && (getHandsSuit(hands.split("")).size() == 1) && (getDistinctHandsNumbers(number).size() == 5)) { //五个相邻的数字且花色一样——同花顺
+        if (isStraightFlush(hands, number)) { //五个相邻的数字且花色一样——同花顺
             handsCategory = "StraightFlush";
-        } else if (number[0] - number[4] == 4 && (getDistinctHandsNumbers(number).size() == 5)) { //五个相邻数字——顺子
+        } else if (isStraight(number)) { //五个相邻数字——顺子
             handsCategory = "Straight";
-        } else if (getHandsSuit(hands.split("")).size() == 1 && getDistinctHandsNumbers(number).size() == 5) { //同一花色——同花
+        } else if (isFlush(hands, number)) { //同一花色——同花
             handsCategory = "Flush";
-        } else if (getDistinctHandsNumbers(number).size() == 5) { //五个不相邻的数字——散牌
+        } else if (isHighCard(number)) { //五个不相邻的数字——散牌
             handsCategory = "HighCard";
-        } else if (getDistinctHandsNumbers(number).size() == 4) { //一对相同，其余三个数字不同——对子
+        } else if (isOnePair(number)) { //一对相同，其余三个数字不同——对子
             handsCategory = "OnePair";
-        } else  if (getDistinctHandsNumbers(number).size() == 3 && ((number[0] == number[1] && number[2] == number[3]) || (number[1] == number[2] && number[3] == number[4]) || (number[0] == number[1] && number[3] == number[4]))) { //两对
+        } else  if (isTwoPair(number)) { //两对
             handsCategory = "TwoPair";
-        } else if (getDistinctHandsNumbers(number).size() == 3) { //三个数字相同，另外两个数字不同——三条
+        } else if (isThreeOfAKind(number)) { //三个数字相同，另外两个数字不同——三条
             handsCategory = "ThreeOfAKind";
-        } if ((getDistinctHandsNumbers(number).size() == 2 || getDistinctHandsNumbers(number).size() == 1) && (number[0] != number[1] || number[3] != number[4])) { //三个数字相同，另外两个数字相同——葫芦
+        } if (isFourOfAKind(number)) { //三个数字相同，另外两个数字相同——葫芦
             handsCategory = "FourOfAKind";
-        } else if (getDistinctHandsNumbers(number).size() == 2 || getDistinctHandsNumbers(number).size() == 1) { //四个数字相同——铁支
+        } else if (isFullHouse(number)) { //四个数字相同——铁支
             handsCategory = "FullHouse";
         }
         return handsCategory;
+    }
+
+    private boolean isFullHouse(int[] number) {
+        return getDistinctHandsNumbers(number).size() == 2 || getDistinctHandsNumbers(number).size() == 1;
+    }
+
+    private boolean isFourOfAKind(int[] number) {
+        return (getDistinctHandsNumbers(number).size() == 2 || getDistinctHandsNumbers(number).size() == 1) && (number[0] != number[1] || number[3] != number[4]);
+    }
+
+    private boolean isThreeOfAKind(int[] number) {
+        return getDistinctHandsNumbers(number).size() == 3;
+    }
+
+    private boolean isTwoPair(int[] number) {
+        return getDistinctHandsNumbers(number).size() == 3 && ((number[0] == number[1] && number[2] == number[3]) || (number[1] == number[2] && number[3] == number[4]) || (number[0] == number[1] && number[3] == number[4]));
+    }
+
+    private boolean isOnePair(int[] number) {
+        return getDistinctHandsNumbers(number).size() == 4;
+    }
+
+    private boolean isHighCard(int[] number) {
+        return getDistinctHandsNumbers(number).size() == 5;
+    }
+
+    private boolean isFlush(String hands, int[] number) {
+        return getHandsSuit(hands.split("")).size() == 1 && getDistinctHandsNumbers(number).size() == 5;
+    }
+
+    private boolean isStraight(int[] number) {
+        return number[0] - number[4] == 4 && (getDistinctHandsNumbers(number).size() == 5);
+    }
+
+    private boolean isStraightFlush(String hands, int[] number) {
+        return (number[0] - number[4] == 4) && (getHandsSuit(hands.split("")).size() == 1) && (getDistinctHandsNumbers(number).size() == 5);
     }
 
     private HashSet<String> getHandsSuit(String[] strArray) {
