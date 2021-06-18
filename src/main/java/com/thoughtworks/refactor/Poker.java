@@ -190,10 +190,9 @@ public class Poker {
     private String getHandsCategory(String hands) {
         String handsCategory = "";
         int[] number = getHandsNumbers(hands);
-        HashSet<Integer> distinctNumbers = getDistinctHandsNumbers(number);
         HashSet<String> suits = getHandsSuit(hands.split(""));
 
-        int distinctNumbersSize = distinctNumbers.size();
+        int distinctNumbersSize = getDistinctHandsNumbers(number).size();
 
         if (distinctNumbersSize == 5) {
             if ((number[0] - number[4] == 4) && (suits.size() == 1) && (distinctNumbersSize == 5)) { //五个相邻的数字且花色一样——同花顺
