@@ -12,8 +12,8 @@ public class Poker {
         int[] whiteNumbers = convertToSortedNumbers(whitePlayerCard);
         int blackIndex = getCardTypeIndex(blackCardType);
         int whiteIndex = getCardTypeIndex(whiteCardType);
-        int[] blackArraySort = sortCardNumbers(blackNumbers);
-        int[] whiteArraySort = sortCardNumbers(whiteNumbers);
+        int[] blackSortedNumbers = sortCardNumbers(blackNumbers);
+        int[] whiteSortedNumbers = sortCardNumbers(whiteNumbers);
         int[] blackRepeat = noOrRepeatNumber(blackNumbers, 0);
         int[] whiteRepeat = noOrRepeatNumber(whiteNumbers, 0);
         int[] blackNoRepeat = noOrRepeatNumber(blackNumbers, 1);
@@ -34,19 +34,19 @@ public class Poker {
                     winResult = "tie";
                 }
             } else if (blackIndex == 1) { //铁支
-                if (blackArraySort[0] < whiteArraySort[0]) {
-                    String sig = intNumber(whiteArraySort[0]);
+                if (blackSortedNumbers[0] < whiteSortedNumbers[0]) {
+                    String sig = intNumber(whiteSortedNumbers[0]);
                     winResult = "white wins - high card:" + sig;
                 } else {
-                    String sig = intNumber(blackArraySort[0]);
+                    String sig = intNumber(blackSortedNumbers[0]);
                     winResult = "black wins - high card:" + sig;
                 }
             } else if (blackIndex == 2) { //葫芦
-                if (blackArraySort[0] < whiteArraySort[0]) {
-                    String sig = intNumber(whiteArraySort[0]);
+                if (blackSortedNumbers[0] < whiteSortedNumbers[0]) {
+                    String sig = intNumber(whiteSortedNumbers[0]);
                     winResult = "white wins - high card:" + sig;
                 } else {
-                    String sig = intNumber(blackArraySort[0]);
+                    String sig = intNumber(blackSortedNumbers[0]);
                     winResult = "black wins - high card:" + sig;
                 }
             } else if (blackIndex == 3) { //同花
