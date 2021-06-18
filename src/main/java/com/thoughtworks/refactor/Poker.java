@@ -196,27 +196,27 @@ public class Poker {
         for (i = 0; i < 5; i++) {
             suit[i] = strArray[i * 3 + 1];
         }
-        HashSet<Integer> hashSetNumber = new HashSet<Integer>();
+        HashSet<Integer> distinctNumbers = new HashSet<Integer>();
         for (i = 0; i < 5; i++) {
-            hashSetNumber.add(number[i]);
+            distinctNumbers.add(number[i]);
         }
         HashSet<String> suits = new HashSet<String>();
         for (i = 0; i < 5; i++) {
             suits.add(suit[i]);
         }
-        if (hashSetNumber.size() == 5) {
-            if ((number[0] - number[4] == 4) && (suits.size() == 1) && (hashSetNumber.size() == 5)) { //五个相邻的数字且花色一样——同花顺
+        if (distinctNumbers.size() == 5) {
+            if ((number[0] - number[4] == 4) && (suits.size() == 1) && (distinctNumbers.size() == 5)) { //五个相邻的数字且花色一样——同花顺
                 handsCategory = "StraightFlush";
-            } else if (number[0] - number[4] == 4 && (hashSetNumber.size() == 5)) { //五个相邻数字——顺子
+            } else if (number[0] - number[4] == 4 && (distinctNumbers.size() == 5)) { //五个相邻数字——顺子
                 handsCategory = "Straight";
             } else if (suits.size() == 1) { //同一花色——同花
                 handsCategory = "Flush";
             } else { //五个不相邻的数字——散牌
                 handsCategory = "HighCard";
             }
-        } else if (hashSetNumber.size() == 4) { //一对相同，其余三个数字不同——对子
+        } else if (distinctNumbers.size() == 4) { //一对相同，其余三个数字不同——对子
             handsCategory = "OnePair";
-        } else if (hashSetNumber.size() == 3) {
+        } else if (distinctNumbers.size() == 3) {
             if ((number[0] == number[1] && number[2] == number[3]) || (number[1] == number[2] && number[3] == number[4]) || (number[0] == number[1] && number[3] == number[4])) { //两对
                 handsCategory = "TwoPair";
             } else { //三个数字相同，另外两个数字不同——三条
