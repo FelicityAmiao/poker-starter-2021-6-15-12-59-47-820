@@ -196,9 +196,9 @@ public class Poker {
                 handsCategory = "StraightFlush";
             } else if (number[0] - number[4] == 4 && (getDistinctHandsNumbers(number).size() == 5)) { //五个相邻数字——顺子
                 handsCategory = "Straight";
-            } else if (getHandsSuit(hands.split("")).size() == 1) { //同一花色——同花
+            } else if (getHandsSuit(hands.split("")).size() == 1 && getDistinctHandsNumbers(number).size() == 5) { //同一花色——同花
                 handsCategory = "Flush";
-            } else { //五个不相邻的数字——散牌
+            } else if (getDistinctHandsNumbers(number).size() == 5) { //五个不相邻的数字——散牌
                 handsCategory = "HighCard";
             }
         } else if (getDistinctHandsNumbers(number).size() == 4) { //一对相同，其余三个数字不同——对子
