@@ -10,8 +10,8 @@ public class Poker {
         String[] cardTypes = {"StraightFlush", "FourOfAKind", "FullHouse", "Flush", "Straight", "ThreeOfAKind", "TwoPair", "OnePair", "HighCard"};
         int[] blackNumbers = convertToSortedNumbers(blackPlayerCard);
         int[] whiteNumbers = convertToSortedNumbers(whitePlayerCard);
-        int blackIndex = judgeIndex(blackCardType);
-        int whiteIndex = judgeIndex(whiteCardType);
+        int blackIndex = getCardTypeIndex(blackCardType);
+        int whiteIndex = getCardTypeIndex(whiteCardType);
         int[] blackArraySort = arraySort(blackNumbers);
         int[] whiteArraySort = arraySort(whiteNumbers);
         int[] blackRepeat = noOrRepeatNumber(blackNumbers, 0);
@@ -235,7 +235,7 @@ public class Poker {
         return reResult;
     }
 
-    private int judgeIndex(String strType) {
+    private int getCardTypeIndex(String strType) {
         int index = -1;
         String[] type = {"StraightFlush", "FourOfAKind", "FullHouse", "Flush", "Straight", "ThreeOfAKind", "TwoPair", "OnePair", "HighCard"};
         for (int i = 0; i < 9; i++) {
