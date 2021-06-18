@@ -198,7 +198,7 @@ public class Poker {
             return "Straight";
         }
         if (isFlush(hands, number)) { //同一花色——同花
-            handsCategory = "Flush";
+            return "Flush";
         } else if (isHighCard(number)) { //五个不相邻的数字——散牌
             handsCategory = "HighCard";
         } else if (isOnePair(number)) { //一对相同，其余三个数字不同——对子
