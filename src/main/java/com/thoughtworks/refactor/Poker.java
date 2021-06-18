@@ -201,12 +201,10 @@ public class Poker {
             handsCategory = "HighCard";
         } else if (getDistinctHandsNumbers(number).size() == 4) { //一对相同，其余三个数字不同——对子
             handsCategory = "OnePair";
-        } else if (getDistinctHandsNumbers(number).size() == 3) {
-            if (getDistinctHandsNumbers(number).size() == 3 && (number[0] == number[1] && number[2] == number[3]) || (number[1] == number[2] && number[3] == number[4]) || (number[0] == number[1] && number[3] == number[4])) { //两对
-                handsCategory = "TwoPair";
-            } else if (getDistinctHandsNumbers(number).size() == 3) { //三个数字相同，另外两个数字不同——三条
-                handsCategory = "ThreeOfAKind";
-            }
+        } else  if (getDistinctHandsNumbers(number).size() == 3 && ((number[0] == number[1] && number[2] == number[3]) || (number[1] == number[2] && number[3] == number[4]) || (number[0] == number[1] && number[3] == number[4]))) { //两对
+            handsCategory = "TwoPair";
+        } else if (getDistinctHandsNumbers(number).size() == 3) { //三个数字相同，另外两个数字不同——三条
+            handsCategory = "ThreeOfAKind";
         } else if (getDistinctHandsNumbers(number).size() == 2 || getDistinctHandsNumbers(number).size() == 1) {
             if (number[0] != number[1] || number[3] != number[4]) { //三个数字相同，另外两个数字相同——葫芦
                 handsCategory = "FourOfAKind";
