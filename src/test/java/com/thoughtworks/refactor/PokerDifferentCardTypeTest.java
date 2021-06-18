@@ -25,7 +25,7 @@ public class PokerDifferentCardTypeTest {
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
     @MethodSource("stringStraightFlushAndWorseCardTypeProvider")
     void test_compare_StraightFlush_with_worse_card_type(String black, String white, String expectResult) {
-        String actualResult = new Poker().compairResult(black, white);
+        String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
@@ -47,7 +47,7 @@ public class PokerDifferentCardTypeTest {
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
     @MethodSource("stringFourOfAKindAndWorseCardTypeProvider")
     void test_compare_FourOfAKind_with_worse_card_type(String black, String white, String expectResult) {
-        String actualResult = new Poker().compairResult(black, white);
+        String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
@@ -68,7 +68,7 @@ public class PokerDifferentCardTypeTest {
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
     @MethodSource("stringFullHouseAndWorseCardTypeProvider")
     void test_compare_FullHouse_with_worse_card_type(String black, String white, String expectResult) {
-        String actualResult = new Poker().compairResult(black, white);
+        String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
@@ -88,7 +88,7 @@ public class PokerDifferentCardTypeTest {
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
     @MethodSource("stringFlushAndWorseCardTypeProvider")
     void test_compare_Flush_with_worse_card_type(String black, String white, String expectResult) {
-        String actualResult = new Poker().compairResult(black, white);
+        String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
@@ -107,7 +107,7 @@ public class PokerDifferentCardTypeTest {
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
     @MethodSource("stringStraightAndWorseCardTypeProvider")
     void test_compare_Straight_with_worse_card_type(String black, String white, String expectResult) {
-        String actualResult = new Poker().compairResult(black, white);
+        String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
@@ -125,7 +125,7 @@ public class PokerDifferentCardTypeTest {
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
     @MethodSource("stringThreeOfAKindAndWorseCardTypeProvider")
     void test_compare_ThreeOfAKind_with_worse_card_type(String black, String white, String expectResult) {
-        String actualResult = new Poker().compairResult(black, white);
+        String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
@@ -142,7 +142,7 @@ public class PokerDifferentCardTypeTest {
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
     @MethodSource("stringTwoPairAndWorseCardTypeProvider")
     void test_compare_TwoPair_with_worse_card_type(String black, String white, String expectResult) {
-        String actualResult = new Poker().compairResult(black, white);
+        String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
@@ -158,7 +158,7 @@ public class PokerDifferentCardTypeTest {
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
     @MethodSource("stringOnePairAndWorseCardTypeProvider")
     void test_compare_OnePair_with_worse_card_type(String black, String white, String expectResult) {
-        String actualResult = new Poker().compairResult(black, white);
+        String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }

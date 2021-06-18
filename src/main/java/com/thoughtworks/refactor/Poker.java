@@ -3,7 +3,7 @@ package com.thoughtworks.refactor;
 import java.util.*;
 
 public class Poker {
-    public String compairResult(String black, String white) {
+    public String compareResult(String black, String white) {
         String winResult = "";
         String blackType = judgeType(black);
         String whiteType = judgeType(white);

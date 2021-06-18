@@ -54,7 +54,7 @@ public class PokerSameCardTypeTest {
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
     @MethodSource("stringBothStraightFlushProvider")
     void test_compare_both_StraightFlush(String black, String white, String expectResult) {
-        String actualResult = new Poker().compairResult(black, white);
+        String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
@@ -73,7 +73,7 @@ public class PokerSameCardTypeTest {
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
     @MethodSource("stringBothFourOfAKindProvider")
     void test_compare_both_FourOfAKind(String black, String white, String expectResult) {
-        String actualResult = new Poker().compairResult(black, white);
+        String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
@@ -89,7 +89,7 @@ public class PokerSameCardTypeTest {
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
     @MethodSource("stringBothFullHouseProvider")
     void test_compare_both_FullHouse(String black, String white, String expectResult) {
-        String actualResult = new Poker().compairResult(black, white);
+        String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
@@ -105,7 +105,7 @@ public class PokerSameCardTypeTest {
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
     @MethodSource("stringBothFlushProvider")
     void test_compare_both_Flush(String black, String white, String expectResult) {
-        String actualResult = new Poker().compairResult(black, white);
+        String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
@@ -123,7 +123,7 @@ public class PokerSameCardTypeTest {
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
     @MethodSource("stringBothStraightProvider")
     void test_compare_both_Straight(String black, String white, String expectResult) {
-        String actualResult = new Poker().compairResult(black, white);
+        String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
@@ -141,7 +141,7 @@ public class PokerSameCardTypeTest {
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
     @MethodSource("stringBothThreeOfAKindProvider")
     void test_compare_both_ThreeOfAKind(String black, String white, String expectResult) {
-        String actualResult = new Poker().compairResult(black, white);
+        String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
@@ -157,7 +157,7 @@ public class PokerSameCardTypeTest {
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
     @MethodSource("stringBothTwoPairProvider")
     void test_compare_both_TwoPair(String black, String white, String expectResult) {
-        String actualResult = new Poker().compairResult(black, white);
+        String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
@@ -179,7 +179,7 @@ public class PokerSameCardTypeTest {
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
     @MethodSource("stringBothOnePairProvider")
     void test_compare_both_OnePair(String black, String white, String expectResult) {
-        String actualResult = new Poker().compairResult(black, white);
+        String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
@@ -199,7 +199,7 @@ public class PokerSameCardTypeTest {
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
     @MethodSource("stringBothHighCardProvider")
     void test_compare_both_HighCard(String black, String white, String expectResult) {
-        String actualResult = new Poker().compairResult(black, white);
+        String actualResult = new Poker().compareResult(black, white);
 
         assertThat(actualResult).isEqualTo(expectResult);
     }
