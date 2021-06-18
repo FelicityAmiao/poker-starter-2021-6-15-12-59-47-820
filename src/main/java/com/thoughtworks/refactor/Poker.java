@@ -191,14 +191,12 @@ public class Poker {
         String handsCategory = "";
         int[] number = getHandsNumbers(hands);
 
-        int suitsSize = getHandsSuit(hands.split("")).size();
-
         if (getDistinctHandsNumbers(number).size() == 5) {
-            if ((number[0] - number[4] == 4) && (suitsSize == 1) && (getDistinctHandsNumbers(number).size() == 5)) { //五个相邻的数字且花色一样——同花顺
+            if ((number[0] - number[4] == 4) && (getHandsSuit(hands.split("")).size() == 1) && (getDistinctHandsNumbers(number).size() == 5)) { //五个相邻的数字且花色一样——同花顺
                 handsCategory = "StraightFlush";
             } else if (number[0] - number[4] == 4 && (getDistinctHandsNumbers(number).size() == 5)) { //五个相邻数字——顺子
                 handsCategory = "Straight";
-            } else if (suitsSize == 1) { //同一花色——同花
+            } else if (getHandsSuit(hands.split("")).size() == 1) { //同一花色——同花
                 handsCategory = "Flush";
             } else { //五个不相邻的数字——散牌
                 handsCategory = "HighCard";
