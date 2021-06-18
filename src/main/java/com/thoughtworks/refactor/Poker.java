@@ -199,18 +199,24 @@ public class Poker {
         }
         if (isFlush(hands, number)) { //同一花色——同花
             return "Flush";
-        } else if (isHighCard(number)) { //五个不相邻的数字——散牌
-            handsCategory = "HighCard";
-        } else if (isOnePair(number)) { //一对相同，其余三个数字不同——对子
-            handsCategory = "OnePair";
-        } else  if (isTwoPair(number)) { //两对
-            handsCategory = "TwoPair";
-        } else if (isThreeOfAKind(number)) { //三个数字相同，另外两个数字不同——三条
-            handsCategory = "ThreeOfAKind";
-        } if (isFourOfAKind(number)) { //三个数字相同，另外两个数字相同——葫芦
-            handsCategory = "FourOfAKind";
-        } else if (isFullHouse(number)) { //四个数字相同——铁支
-            handsCategory = "FullHouse";
+        }
+        if (isHighCard(number)) { //五个不相邻的数字——散牌
+            return "HighCard";
+        }
+        if (isOnePair(number)) { //一对相同，其余三个数字不同——对子
+            return "OnePair";
+        }
+        if (isTwoPair(number)) { //两对
+            return "TwoPair";
+        }
+        if (isThreeOfAKind(number)) { //三个数字相同，另外两个数字不同——三条
+            return "ThreeOfAKind";
+        }
+        if (isFourOfAKind(number)) { //三个数字相同，另外两个数字相同——葫芦
+            return "FourOfAKind";
+        } 
+        if (isFullHouse(number)) { //四个数字相同——铁支
+            return "FullHouse";
         }
         return handsCategory;
     }
