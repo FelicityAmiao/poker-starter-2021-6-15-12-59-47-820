@@ -16,8 +16,8 @@ public class Poker {
         int[] whiteSortedNumbers = sortCardNumbers(whiteNumbers);
         int[] blackRepeatNumbers = getRepeatNumbersByFlag(blackNumbers, 0);
         int[] whiteRepeatNumbers = getRepeatNumbersByFlag(whiteNumbers, 0);
-        int[] blackNoRepeat = getRepeatNumbersByFlag(blackNumbers, 1);
-        int[] whiteNoRepeat = getRepeatNumbersByFlag(whiteNumbers, 1);
+        int[] blackNoRepeatNumbers = getRepeatNumbersByFlag(blackNumbers, 1);
+        int[] whiteNoRepeatNumbers = getRepeatNumbersByFlag(whiteNumbers, 1);
         if (blackIndex < whiteIndex) {
             winResult = "black wins - " + cardTypes[blackIndex];
         } else if (blackIndex > whiteIndex) {
@@ -94,11 +94,11 @@ public class Poker {
                     }
                 }
                 if (winResult == "") {
-                    if (blackNoRepeat[0] < whiteNoRepeat[0]) {
-                        String sig = intNumber(whiteNoRepeat[0]);
+                    if (blackNoRepeatNumbers[0] < whiteNoRepeatNumbers[0]) {
+                        String sig = intNumber(whiteNoRepeatNumbers[0]);
                         winResult = "white wins - high card:" + sig;
-                    } else if (blackNoRepeat[0] > whiteNoRepeat[0]) {
-                        String sig = intNumber(blackNoRepeat[0]);
+                    } else if (blackNoRepeatNumbers[0] > whiteNoRepeatNumbers[0]) {
+                        String sig = intNumber(blackNoRepeatNumbers[0]);
                         winResult = "black wins - high card:" + sig;
                     } else {
                         winResult = "tie";
@@ -113,12 +113,12 @@ public class Poker {
                     winResult = "black wins - high card:" + sig;
                 } else {
                     for (int i = 0; i < 3; i++) {
-                        if (blackNoRepeat[i] < whiteNoRepeat[i]) {
-                            String sig = intNumber(whiteNoRepeat[i]);
+                        if (blackNoRepeatNumbers[i] < whiteNoRepeatNumbers[i]) {
+                            String sig = intNumber(whiteNoRepeatNumbers[i]);
                             winResult = "white wins - high card:" + sig;
                             break;
-                        } else if (blackNoRepeat[i] > whiteNoRepeat[i]) {
-                            String sig = intNumber(blackNoRepeat[i]);
+                        } else if (blackNoRepeatNumbers[i] > whiteNoRepeatNumbers[i]) {
+                            String sig = intNumber(blackNoRepeatNumbers[i]);
                             winResult = "black wins - high card:" + sig;
                             break;
                         } else {
