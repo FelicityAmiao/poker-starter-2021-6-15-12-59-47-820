@@ -10,22 +10,22 @@ public class Poker {
         String blackHandsCategory = getHandsCategory(blackHands);
         String whiteHandsCategory = getHandsCategory(whiteHands);
         String[] handsCategories = {"StraightFlush", "FourOfAKind", "FullHouse", "Flush", "Straight", "ThreeOfAKind", "TwoPair", "OnePair", "HighCard"};
-        int[] blackHandsNumbers = getHandsNumbers(blackHands);
-        int[] whiteHandsNumbers = getHandsNumbers(whiteHands);
-        int blackHandsCategoryIndex = getHandsCategoryIndex(blackHandsCategory);
-        int whiteHandsCategoryIndex = getHandsCategoryIndex(whiteHandsCategory);
+        int[] blackHandsNumbers = getDescendingHandsNumbers(blackHands);
+        int[] whiteHandsNumbers = getDescendingHandsNumbers(whiteHands);
+        int blackHandsCategoryRank = getHandsCategoryRank(blackHandsCategory);
+        int whiteHandsCategoryRank = getHandsCategoryRank(whiteHandsCategory);
         int[] descendingBlackHandsNumbers = descendingSort(blackHandsNumbers);
         int[] descendingWhiteHandsNumbers = descendingSort(whiteHandsNumbers);
         int[] repeatBlackHandsNumbers = getRepeatNumbers(blackHandsNumbers);
         int[] repeatWhiteHandsNumbers = getRepeatNumbers(whiteHandsNumbers);
         int[] noRepeatBlackHandsNumbers = getNoRepeatNumbers(blackHandsNumbers);
         int[] noRepeatWhiteHandsNumbers = getNoRepeatNumbers(whiteHandsNumbers);
-        if (blackHandsCategoryIndex < whiteHandsCategoryIndex) {
-            winResult = "black wins - " + handsCategories[blackHandsCategoryIndex];
-        } else if (blackHandsCategoryIndex > whiteHandsCategoryIndex) {
-            winResult = "white wins - " + handsCategories[whiteHandsCategoryIndex];
+        if (blackHandsCategoryRank < whiteHandsCategoryRank) {
+            winResult = "black wins - " + handsCategories[blackHandsCategoryRank];
+        } else if (blackHandsCategoryRank > whiteHandsCategoryRank) {
+            winResult = "white wins - " + handsCategories[whiteHandsCategoryRank];
         } else {
-            if (blackHandsCategoryIndex == 0) { //同花顺
+            if (blackHandsCategoryRank == 0) { //同花顺
                 if (blackHandsNumbers[0] < whiteHandsNumbers[0]) {
                     String sig = showCard(whiteHandsNumbers[0]);
                     winResult = "white wins - high card:" + sig;
@@ -35,7 +35,7 @@ public class Poker {
                 } else {
                     winResult = "tie";
                 }
-            } else if (blackHandsCategoryIndex == 1) { //铁支
+            } else if (blackHandsCategoryRank == 1) { //铁支
                 if (descendingBlackHandsNumbers[0] < descendingWhiteHandsNumbers[0]) {
                     String sig = showCard(descendingWhiteHandsNumbers[0]);
                     winResult = "white wins - high card:" + sig;
@@ -43,7 +43,7 @@ public class Poker {
                     String sig = showCard(descendingBlackHandsNumbers[0]);
                     winResult = "black wins - high card:" + sig;
                 }
-            } else if (blackHandsCategoryIndex == 2) { //葫芦
+            } else if (blackHandsCategoryRank == 2) { //葫芦
                 if (descendingBlackHandsNumbers[0] < descendingWhiteHandsNumbers[0]) {
                     String sig = showCard(descendingWhiteHandsNumbers[0]);
                     winResult = "white wins - high card:" + sig;
@@ -51,7 +51,7 @@ public class Poker {
                     String sig = showCard(descendingBlackHandsNumbers[0]);
                     winResult = "black wins - high card:" + sig;
                 }
-            } else if (blackHandsCategoryIndex == 3) { //同花
+            } else if (blackHandsCategoryRank == 3) { //同花
                 for (int i = 0; i < 5; i++) {
                     if (blackHandsNumbers[i] < whiteHandsNumbers[i]) {
                         String sig = showCard(whiteHandsNumbers[i]);
@@ -65,7 +65,7 @@ public class Poker {
                         winResult = "tie";
                     }
                 }
-            } else if (blackHandsCategoryIndex == 4) { //顺子
+            } else if (blackHandsCategoryRank == 4) { //顺子
                 if (blackHandsNumbers[0] < whiteHandsNumbers[0]) {
                     String sig = showCard(whiteHandsNumbers[0]);
                     winResult = "white wins - high card:" + sig;
@@ -75,7 +75,7 @@ public class Poker {
                 } else {
                     winResult = "tie";
                 }
-            } else if (blackHandsCategoryIndex == 5) { //三条
+            } else if (blackHandsCategoryRank == 5) { //三条
                 if (repeatBlackHandsNumbers[0] < repeatWhiteHandsNumbers[0]) {
                     String sig = showCard(repeatWhiteHandsNumbers[0]);
                     winResult = "white wins - high card:" + sig;
@@ -83,7 +83,7 @@ public class Poker {
                     String sig = showCard(repeatBlackHandsNumbers[0]);
                     winResult = "black wins - high card:" + sig;
                 }
-            } else if (blackHandsCategoryIndex == 6) { //两对
+            } else if (blackHandsCategoryRank == 6) { //两对
                 for (int i = 0; i < 2; i++) {
                     if (repeatBlackHandsNumbers[i] < repeatWhiteHandsNumbers[i]) {
                         String sig = showCard(repeatWhiteHandsNumbers[i]);
@@ -106,7 +106,7 @@ public class Poker {
                         winResult = "tie";
                     }
                 }
-            } else if (blackHandsCategoryIndex == 7) { //对子
+            } else if (blackHandsCategoryRank == 7) { //对子
                 if (repeatBlackHandsNumbers[0] < repeatWhiteHandsNumbers[0]) {
                     String sig = showCard(repeatWhiteHandsNumbers[0]);
                     winResult = "white wins - high card:" + sig;
@@ -175,7 +175,7 @@ public class Poker {
             .toArray();
     }
 
-    private int getHandsCategoryIndex(String handsCategory) {
+    private int getHandsCategoryRank(String handsCategory) {
         int index = -1;
         String[] handsCategories = {"StraightFlush", "FourOfAKind", "FullHouse", "Flush", "Straight", "ThreeOfAKind", "TwoPair", "OnePair", "HighCard"};
         for (int i = 0; i < 9; i++) {
@@ -186,113 +186,85 @@ public class Poker {
         return index;
     }
 
-    //判断是什么牌
     private String getHandsCategory(String hands) {
-        String handsCategory = "";
-
-        if (isStraightFlush(hands)) { //五个相邻的数字且花色一样——同花顺
+        if (isStraightFlush(hands)) {
             return "StraightFlush";
         }
-        if (isStraight(hands)) { //五个相邻数字——顺子
+        if (isStraight(hands)) {
             return "Straight";
         }
-        if (isFlush(hands)) { //同一花色——同花
+        if (isFlush(hands)) {
             return "Flush";
         }
-        if (isHighCard(hands)) { //五个不相邻的数字——散牌
+        if (isHighCard(hands)) {
             return "HighCard";
         }
-        if (isOnePair(hands)) { //一对相同，其余三个数字不同——对子
+        if (isOnePair(hands)) {
             return "OnePair";
         }
-        if (isTwoPair(hands)) { //两对
+        if (isTwoPair(hands)) {
             return "TwoPair";
         }
-        if (isThreeOfAKind(hands)) { //三个数字相同，另外两个数字不同——三条
+        if (isThreeOfAKind(hands)) {
             return "ThreeOfAKind";
         }
-        if (isFourOfAKind(hands)) { //四个数字相同——铁支
+        if (isFourOfAKind(hands)) {
             return "FourOfAKind";
         }
-        if (isFullHouse(hands)) { //三个数字相同，另外两个数字相同——葫芦
-            return "FullHouse";
-        }
-        return handsCategory;
-    }
-
-    private boolean isFullHouse(String hands) {
-        return isFullHouse(getHandsNumbers(hands));
+        return "FullHouse";
     }
 
     private boolean isFourOfAKind(String hands) {
-        return isFourOfAKind(getHandsNumbers(hands));
+        int[] handsNumbers = getDescendingHandsNumbers(hands);
+        return handsNumbers[0] != handsNumbers[1] || handsNumbers[3] != handsNumbers[4];
     }
 
     private boolean isThreeOfAKind(String hands) {
-        return isThreeOfAKind(getHandsNumbers(hands));
+        return countDistinctNumbers(hands) == 3;
     }
 
     private boolean isTwoPair(String hands) {
-        return isTwoPair(getHandsNumbers(hands));
+        int[] handsNumbers = getDescendingHandsNumbers(hands);
+        return countDistinctNumbers(hands) == 3 &&
+            ((handsNumbers[0] == handsNumbers[1] && handsNumbers[2] == handsNumbers[3]) ||
+                (handsNumbers[1] == handsNumbers[2] && handsNumbers[3] == handsNumbers[4]) ||
+                (handsNumbers[0] == handsNumbers[1] && handsNumbers[3] == handsNumbers[4]));
     }
 
     private boolean isOnePair(String hands) {
-        return isOnePair(getHandsNumbers(hands));
+        return countDistinctNumbers(hands) == 4;
     }
 
     private boolean isHighCard(String hands) {
-        return isHighCard(getHandsNumbers(hands));
+        return countDistinctNumbers(hands) == 5;
     }
 
     private boolean isFlush(String hands) {
-        return isFlush(hands, getHandsNumbers(hands));
+        return countDistinctNumbers(hands) == 5 && countSuits(hands) == 1;
     }
 
     private boolean isStraight(String hands) {
-        return isStraight(getHandsNumbers(hands));
+        int[] handsNumbers = getDescendingHandsNumbers(hands);
+        return countDistinctNumbers(hands) == 5 && handsNumbers[0] - handsNumbers[4] == 4;
     }
 
     private boolean isStraightFlush(String hands) {
-        return isStraightFlush(hands, getHandsNumbers(hands));
+        int[] handsNumbers = getDescendingHandsNumbers(hands);
+        return countDistinctNumbers(hands) == 5 && handsNumbers[0] - handsNumbers[4] == 4 && countSuits(hands) == 1;
     }
 
-    private boolean isFullHouse(int[] number) {
-        return getDistinctHandsNumbers(number).size() == 2 || getDistinctHandsNumbers(number).size() == 1;
+    private int countDistinctNumbers(String hands) {
+        int i;
+        HashSet<Integer> distinctNumbers = new HashSet<Integer>();
+        for (i = 0; i < 5; i++) {
+            distinctNumbers.add(getDescendingHandsNumbers(hands)[i]);
+        }
+        int distinctNumbersCount = distinctNumbers.size();
+        return distinctNumbersCount;
     }
 
-    private boolean isFourOfAKind(int[] number) {
-        return (getDistinctHandsNumbers(number).size() == 2 || getDistinctHandsNumbers(number).size() == 1) && (number[0] != number[1] || number[3] != number[4]);
-    }
-
-    private boolean isThreeOfAKind(int[] number) {
-        return getDistinctHandsNumbers(number).size() == 3;
-    }
-
-    private boolean isTwoPair(int[] number) {
-        return getDistinctHandsNumbers(number).size() == 3 && ((number[0] == number[1] && number[2] == number[3]) || (number[1] == number[2] && number[3] == number[4]) || (number[0] == number[1] && number[3] == number[4]));
-    }
-
-    private boolean isOnePair(int[] number) {
-        return getDistinctHandsNumbers(number).size() == 4;
-    }
-
-    private boolean isHighCard(int[] number) {
-        return getDistinctHandsNumbers(number).size() == 5;
-    }
-
-    private boolean isFlush(String hands, int[] number) {
-        return getHandsSuit(hands.split("")).size() == 1 && getDistinctHandsNumbers(number).size() == 5;
-    }
-
-    private boolean isStraight(int[] number) {
-        return number[0] - number[4] == 4 && (getDistinctHandsNumbers(number).size() == 5);
-    }
-
-    private boolean isStraightFlush(String hands, int[] number) {
-        return (number[0] - number[4] == 4) && (getHandsSuit(hands.split("")).size() == 1) && (getDistinctHandsNumbers(number).size() == 5);
-    }
-
-    private HashSet<String> getHandsSuit(String[] strArray) {
+    private int countSuits(String hands) {
+        String[] strArray = hands.split("");
         int i;
         String[] suit = new String[5];
         for (i = 0; i < 5; i++) {
@@ -302,20 +274,11 @@ public class Poker {
         for (i = 0; i < 5; i++) {
             suits.add(suit[i]);
         }
-        return suits;
+        int suitsCount = suits.size();
+        return suitsCount;
     }
 
-    private HashSet<Integer> getDistinctHandsNumbers(int[] number) {
-        int i;
-        HashSet<Integer> distinctNumbers = new HashSet<Integer>();
-        for (i = 0; i < 5; i++) {
-            distinctNumbers.add(number[i]);
-        }
-        return distinctNumbers;
-    }
-
-    //数字转化并将其从大到小排序
-    private int[] getHandsNumbers(String hands) {
+    private int[] getDescendingHandsNumbers(String hands) {
         int[] cardNumbers = getCardNumbers(hands);
         return descendingSort(cardNumbers);
     }
