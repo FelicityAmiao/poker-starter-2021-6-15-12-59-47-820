@@ -11,44 +11,44 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PokerSameCardTypeTest {
 
-    private static final String STRAIGHT_FLUSH_HIGH = "A♥ K♥ Q♥ J♥ T♥";
-    private static final String STRAIGHT_FLUSH_SAME_HIGH = "A♠ K♠ Q♠ J♠ T♠";
-    private static final String STRAIGHT_FLUSH_LOW = "K♥ Q♥ J♥ T♥ 9♥";
-    private static final String STRAIGHT_FLUSH_SAME_LOW = "K♠ Q♠ J♠ T♠ 9♠";
+    private static final String STRAIGHT_FLUSH_HIGH = "A2 K2 Q2 J2 T2";
+    private static final String STRAIGHT_FLUSH_SAME_HIGH = "A1 K1 Q1 J1 T1";
+    private static final String STRAIGHT_FLUSH_LOW = "K2 Q2 J2 T2 92";
+    private static final String STRAIGHT_FLUSH_SAME_LOW = "K1 Q1 J1 T1 91";
 
-    public static final String FOUR_OF_A_KIND_HIGH = "A♠ A♥ A♣ A♦ T♣";
-    public static final String FOUR_OF_A_KIND_LOW = "K♠ K♥ K♣ K♦ Q♣";
+    public static final String FOUR_OF_A_KIND_HIGH = "A1 A2 A3 A4 T3";
+    public static final String FOUR_OF_A_KIND_LOW = "K1 K2 K3 K4 Q3";
 
-    public static final String FULL_HOUSE_HIGH = "A♠ A♣ A♦ J♠ J♣";
-    public static final String FULL_HOUSE_LOW = "K♠ K♣ K♦ Q♠ Q♣";
+    public static final String FULL_HOUSE_HIGH = "A1 A3 A4 J1 J3";
+    public static final String FULL_HOUSE_LOW = "K1 K3 K4 Q1 Q3";
 
-    public static final String FLUSH_HIGH = "A♠ K♠ Q♠ J♠ 9♠";
-    public static final String FLUSH_SAME_HIGH = "A♣ K♣ Q♣ J♣ 9♣";
-    public static final String FLUSH_LOW = "A♥ Q♥ J♥ T♥ 9♥";
-    public static final String FLUSH_SAME_LOW = "A♦ Q♦ J♦ T♦ 9♦";
+    public static final String FLUSH_HIGH = "A1 K1 Q1 J1 91";
+    public static final String FLUSH_SAME_HIGH = "A3 K3 Q3 J3 93";
+    public static final String FLUSH_LOW = "A2 Q2 J2 T2 92";
+    public static final String FLUSH_SAME_LOW = "A4 Q4 J4 T4 94";
 
-    public static final String STRAIGHT_HIGH = "A♠ K♠ Q♠ J♠ T♣";
-    public static final String STRAIGHT_SAME_HIGH = "A♥ K♥ Q♥ J♥ T♦";
-    public static final String STRAIGHT_LOW = "K♥ Q♥ J♥ T♥ 9♠";
-    public static final String STRAIGHT_SAME_LOW = "K♣ Q♣ J♣ T♣ 9♦";
+    public static final String STRAIGHT_HIGH = "A1 K1 Q1 J1 T3";
+    public static final String STRAIGHT_SAME_HIGH = "A2 K2 Q2 J2 T4";
+    public static final String STRAIGHT_LOW = "K2 Q2 J2 T2 91";
+    public static final String STRAIGHT_SAME_LOW = "K3 Q3 J3 T3 94";
 
-    public static final String THREE_OF_A_KIND_HIGH = "A♠ A♣ A♦ 9♠ 8♣";
-    public static final String THREE_OF_A_KIND_LOW = "K♥ K♣ K♦ Q♠ J♣";
+    public static final String THREE_OF_A_KIND_HIGH = "A1 A3 A4 91 83";
+    public static final String THREE_OF_A_KIND_LOW = "K2 K3 K4 Q1 J3";
 
-    public static final String TWO_PAIR_HIGH = "A♠ A♣ K♦ K♠ Q♣";
-    public static final String TWO_PAIR_FIRST_LOW = "K♠ K♣ Q♦ Q♠ J♣";
-    public static final String TWO_PAIR_SECOND_LOW = "A♥ A♦ Q♦ Q♠ J♣";
-    public static final String TWO_PAIR_SINGLE_LOW = "A♠ A♥ K♥ K♣ J♣";
-    public static final String TWO_PAIR_SAME_HIGH = "A♣ A♦ K♥ K♣ Q♠";
+    public static final String TWO_PAIR_HIGH = "A1 A3 K4 K1 Q3";
+    public static final String TWO_PAIR_FIRST_LOW = "K1 K3 Q4 Q1 J3";
+    public static final String TWO_PAIR_SECOND_LOW = "A2 A4 Q4 Q1 J3";
+    public static final String TWO_PAIR_SINGLE_LOW = "A1 A2 K2 K3 J3";
+    public static final String TWO_PAIR_SAME_HIGH = "A3 A4 K2 K3 Q1";
 
-    public static final String ONE_PAIR_HIGH = "A♠ A♣ K♦ Q♠ J♣";
-    public static final String ONE_PAIR_PAIR_LOW = "K♠ K♣ Q♦ J♠ T♣";
-    public static final String ONE_PAIR_SINGLE_LOW = "A♥ A♦ K♥ Q♥ T♠";
-    public static final String ONE_PAIR_SAME_HIGH = "A♥ A♦ K♥ Q♥ J♠";
+    public static final String ONE_PAIR_HIGH = "A1 A3 K4 Q1 J3";
+    public static final String ONE_PAIR_PAIR_LOW = "K1 K3 Q4 J1 T3";
+    public static final String ONE_PAIR_SINGLE_LOW = "A2 A4 K2 Q2 T1";
+    public static final String ONE_PAIR_SAME_HIGH = "A2 A4 K2 Q2 J1";
 
-    public static final String HIGH_CARD_HIGH = "A♠ K♣ Q♦ J♠ 8♣";
-    public static final String HIGH_CARD_LOW = "A♥ K♦ Q♥ T♠ 9♣";
-    public static final String HIGH_CARD_SAME_HIGH = "A♥ K♦ Q♥ J♣ 8♠";
+    public static final String HIGH_CARD_HIGH = "A1 K3 Q4 J1 83";
+    public static final String HIGH_CARD_LOW = "A2 K4 Q2 T1 93";
+    public static final String HIGH_CARD_SAME_HIGH = "A2 K4 Q2 J3 81";
 
     @DisplayName("The StraightFlush with higher card should win, or should tie")
     @ParameterizedTest(name = "should return {2} when compare black: {0} and white: {1}")
